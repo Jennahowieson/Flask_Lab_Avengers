@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for event in events %}
+    <h2>{{event.name}}</h2>
+    <p>{{event.return_date_string()}}</p>
+    <p>{{event.location}}</p>
+    <p>{{event.capacity}}</p>
+    {% if event.recurring %}
+    <p>reaccuring event</p>
+    {% endif %}
+    <p>{{event.description}}</p><br>
+{% endfor %}
+<h2>Do you have an event?</h2>
+<form action="/events" method="post">
+    <label for="date">Date:</label>
+    <input type="datetime-local" name="date" id="date">
+    <label for="title">Event Title:</label>
+    <input type="text" name="title" id="title">
+    <label for="capacity">Capacity</label>
+    <input type="number" name="capacity" id="capacity">
+    <label for="location">Where:</label>
+    <input type="text" name="location" id="location">
+    <textarea name="description" id="description" cols="20" rows="4">What is the event about...</textarea>
+    <label for="recurring">Is it recurring? </label>
+    <input type="checkbox" name="recurring" id="recurring"> 
+    <input type="submit" value="Create event">
+</form>
+
+
+{% endblock %}
